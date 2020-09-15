@@ -1,0 +1,62 @@
+<html>
+	<head>
+		<title>Phone Number Format for India</title>
+		<script type="text/javascript">
+			function format()
+			{
+				var original = document.getElementById('raw').value;
+				if(original.charAt(0)=='(') original=original.substring(1);
+				if(original.charAt(0)=='+') original=original.substring(1);
+          	if(original.charAt(0)=='0') original=original.substring(1);
+      		if(original.charAt(0)=='0') original=original.substring(1);
+				if(original.charAt(0)=='0')
+				{
+				    alert('How many zeroes have you put in the beginning?! Start Again!')
+				    document.getElementById('raw').value = "";   // set focus?
+                    return;
+          	}
+          	if(original.substr(0,2)=="91") original=original.substring(2);    
+				var cleaned="";
+				for(i=0;i<original.length;i++)
+				{
+				    if(original.charAt(i)==' ') continue;
+				    if(!isNaN(original.charAt(i)))
+				    {
+				        cleaned = cleaned+original.charAt(i);
+				    }
+				    else
+				    {
+				        if((original.charAt(i)!='-')&&(original.charAt(i)!='.')&&(original.charAt(i)!='(')&&(original.charAt(i)!=')'))
+				        {
+				            alert('Invalid number, enter again! Avoid using "'+original.charAt(i)+'" in a phone number?!');
+				            document.getElementById('raw').value = "";   // set focus?
+				            return;
+				        }
+				    }
+				}
+				if(cleaned.length != 10)
+          	{
+					 alert('Invalid number, enter again! Including STD code, a phone number in India should be of exactly 10 digits!')
+				    document.getElementById('raw').value = "";   // set focus?
+                    return;
+          	}
+				document.getElementById('output').innerHTML = '<b style="color:#888; font-size:80%;">+91</b> ' + cleaned.substring(0,3) + '-' + cleaned.substring(3,6) + '-' + cleaned.substring(6);
+                return;				
+			}
+		</script>
+	</head>
+	<body style="text-align:center; font-family: Sans-Serif; font-size:large;">
+		<h1>People from India:</h1>
+		<blockquote>Please learn to write your phone number properly... Make it EASY to Read and Memorize!</blockquote>
+		<h2>I will show you how!</h2>
+		<h3>Enter an Indian Phone Number Here:</h3>
+		<input type="text" id="raw" size="20" style="font-size:xx-large;"/><br /><br />
+		<input type="button" onclick="javascript:format();" value="Click Here To Format it Properly" style="font-size:large;"/><br />
+		<h1 id="output" style="letter-spacing:1px; display:block;">your input is not stored</h1>
+		<ul>
+		    <li>Use the ISD country code "91" only for international audience who may not know it already.</li>
+		    <li>Do not put "00" before "91", use a '+' sign instead!</li>
+		    <li>Break your number as xxx-xxx-xxxx, instead of one long string</li>
+		</ul>
+	</body>
+</html>
